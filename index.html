@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleiderspenden-Registrierung</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/index.html"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img src="/images/android-chrome-512x512.png" alt="Logo" class="img-fluid px-2" style="max-width: 50px;">
+            <span class="fs-4">Kleiderspenden</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/index.html" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="/html/krisengebiete.html" class="nav-link">Krisengebiete</a></li>
+            <li class="nav-item"><a href="/html/überuns.html" class="nav-link">Über uns</a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        <form>
+
+            <p>
+                <label class="me-3">
+                    <input type="radio" name="optionsRadios" id="optionOne" value="option1" checked="">
+                    Übergabe an der Geschäftsstelle
+                </label>
+
+                <label>
+                    <input type="radio" name="optionsRadios" id="optionTwo" value="option2">
+                    Abholung
+                </label>
+            </p>
+
+            <p class="mb-3" id="addressInputContainer" style="display: none;">
+                <label class="form-label" for="streetInput">Straße und Hausnummer</label>
+                <input type="text" id="streetInput" placeholder="Straße und Hausnummer" class="form-control"
+                    aria-label="Textfeld für Straße und Hausnummer">
+            </p>
+
+            <p class="mb-3" id="postalCodeInputContainer" style="display: none;">
+                <label class="form-label" for="postalCodeInput">Postleitzahl</label>
+                <input type="text" id="postalCodeInput" placeholder="Postleitzahl" class="form-control"
+                    aria-label="Textfeld für Postleitzahl">
+            </p>
+
+            <select class="form-select mb-3" aria-label="Kleidungsarten wählen" id="clothingType">
+                <option selected>Art der Kleidung wählen</option>
+                <option value="Oberteil">Oberteil</option>
+                <option value="Hose">Hose</option>
+                <option value="Schuhe">Schuhe</option>
+            </select>
+
+            <select class="form-select" aria-label="Krisengebiet wählen" id="locationSelect">
+                <option selected>Wählen Sie ein Krisengebiet</option>
+                <option value="Syrien">Syrien</option>
+                <option value="Ukraine">Ukraine</option>
+                <option value="Afghanistan">Afghanistan</option>
+                <option value="Jemen">Jemen</option>
+                <option value="Sudan">Sudan</option>
+                <option value="Somalia">Somalia</option>
+                <option value="Palästina">Palästina</option>
+            </select>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="container">
+        <footer class="py-3 my-3 border-top">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/html/footer-sites/impressum.html"
+                        class="nav-link px-2 text-body-secondary">Impressum</a></li>
+                <li class="nav-item"><a href="/html/footer-sites/datenschutz.html"
+                        class="nav-link px-2 text-body-secondary">Datenschutz</a></li>
+                <li class="nav-item"><a href="/html/footer-sites/faq.html"
+                        class="nav-link px-2 text-body-secondary">FAQ</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">© 2025 Kleiderspenden-Registrierung</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const clothingType = document.getElementById('clothingType');
+            const optionOne = document.getElementById('optionOne');
+            const optionTwo = document.getElementById('optionTwo');
+
+            const addressInputContainer = document.getElementById('addressInputContainer');
+            const postalCodeInputContainer = document.getElementById('postalCodeInputContainer');
+
+            if( optionOne.checked) {
+                addressInputContainer.style.display = 'none'; // Hide street input field
+                postalCodeInputContainer.style.display = 'none'; // Hide postal code input field
+            } else if (optionTwo.checked) {
+                addressInputContainer.style.display = 'block'; // Show street input field
+                postalCodeInputContainer.style.display = 'block'; // Show postal code input field
+            }
+
+            optionOne.addEventListener('change', function () {
+                if (optionOne.checked) {
+
+                    addressInputContainer.style.display = 'none'; // Hide street input field
+                    postalCodeInputContainer.style.display = 'none'; // Hide postal code input field
+                }
+            });
+
+            optionTwo.addEventListener('change', function () {
+                if (optionTwo.checked) {
+                    addressInputContainer.style.display = 'block'; // Show street input field
+                    postalCodeInputContainer.style.display = 'block'; // Show postal code input field
+                }
+            });
+
+            // Optional: Add event listeners for the new input fields
+            const streetInput = document.getElementById('streetInput');
+            const postalCodeInput = document.getElementById('postalCodeInput');
+
+            streetInput.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    alert('Straße und Hausnummer: ' + streetInput.value);
+                }
+            });
+
+            postalCodeInput.addEventListener('keypress', function (event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    alert('Postleitzahl: ' + postalCodeInput.value);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
