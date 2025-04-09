@@ -81,17 +81,23 @@
     </div>
 
     <script>
+        function sanitizeInput(input) {
+            const tempDiv = document.createElement('div');
+            tempDiv.textContent = input || ''; // Ensure null or undefined is handled
+            return tempDiv.innerHTML;
+        }
+
         const selectedOption = localStorage.getItem('selectedOption');
         const streetValue = localStorage.getItem('streetValue');
         const postalCodeValue = localStorage.getItem('postalCodeValue');
         const selectedClothingType = localStorage.getItem('selectedClothingType');
         const selectedLocation = localStorage.getItem('selectedLocation');
 
-        document.getElementById('selectedOption').textContent = selectedOption;
-        document.getElementById('streetValue').textContent = streetValue;
-        document.getElementById('postalCodeValue').textContent = postalCodeValue;
-        document.getElementById('selectedClothingType').textContent = selectedClothingType;
-        document.getElementById('selectedLocation').textContent = selectedLocation;
+        document.getElementById('selectedOption').textContent = sanitizeInput(selectedOption);
+        document.getElementById('streetValue').textContent = sanitizeInput(streetValue);
+        document.getElementById('postalCodeValue').textContent = sanitizeInput(postalCodeValue);
+        document.getElementById('selectedClothingType').textContent = sanitizeInput(selectedClothingType);
+        document.getElementById('selectedLocation').textContent = sanitizeInput(selectedLocation);
 
     </script>
 
