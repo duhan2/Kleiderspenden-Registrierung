@@ -31,7 +31,6 @@
 
     <div class="container">
         <form>
-
             <p>
                 <label class="me-3">
                     <input type="radio" name="optionsRadios" id="optionOne" value="option1" checked="">
@@ -63,7 +62,7 @@
                 <option value="Schuhe">Schuhe</option>
             </select>
 
-            <select class="form-select" aria-label="Krisengebiet wählen" id="locationSelect">
+            <select class="form-select mb-3" aria-label="Krisengebiet wählen" id="locationSelect">
                 <option selected>Wählen Sie ein Krisengebiet</option>
                 <option value="Syrien">Syrien</option>
                 <option value="Ukraine">Ukraine</option>
@@ -73,6 +72,9 @@
                 <option value="Somalia">Somalia</option>
                 <option value="Palästina">Palästina</option>
             </select>
+
+            <button type="button" class="btn btn-primary" onclick="submitForm()">Submit</button>
+
         </form>
     </div>
 
@@ -98,53 +100,94 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const clothingType = document.getElementById('clothingType');
+            const locationSelect = document.getElementById('locationSelect');
             const optionOne = document.getElementById('optionOne');
             const optionTwo = document.getElementById('optionTwo');
+            const streetInput = document.getElementById('streetInput');
+            const postalCodeInput = document.getElementById('postalCodeInput');
 
             const addressInputContainer = document.getElementById('addressInputContainer');
             const postalCodeInputContainer = document.getElementById('postalCodeInputContainer');
 
-            if( optionOne.checked) {
-                addressInputContainer.style.display = 'none'; // Hide street input field
-                postalCodeInputContainer.style.display = 'none'; // Hide postal code input field
-            } else if (optionTwo.checked) {
-                addressInputContainer.style.display = 'block'; // Show street input field
-                postalCodeInputContainer.style.display = 'block'; // Show postal code input field
-            }
+            localStorage.clear(); // Clear local storage on page load
 
+            // Handle radio button changes
             optionOne.addEventListener('change', function () {
                 if (optionOne.checked) {
-
-                    addressInputContainer.style.display = 'none'; // Hide street input field
-                    postalCodeInputContainer.style.display = 'none'; // Hide postal code input field
+                    addressInputContainer.style.display = 'none';
+                    postalCodeInputContainer.style.display = 'none';
                 }
             });
 
             optionTwo.addEventListener('change', function () {
                 if (optionTwo.checked) {
-                    addressInputContainer.style.display = 'block'; // Show street input field
-                    postalCodeInputContainer.style.display = 'block'; // Show postal code input field
+                    addressInputContainer.style.display = 'block';
+                    postalCodeInputContainer.style.display = 'block';
                 }
             });
 
-            // Optional: Add event listeners for the new input fields
-            const streetInput = document.getElementById('streetInput');
-            const postalCodeInput = document.getElementById('postalCodeInput');
-
-            streetInput.addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    alert('Straße und Hausnummer: ' + streetInput.value);
-                }
-            });
-
-            postalCodeInput.addEventListener('keypress', function (event) {
-                if (event.key === 'Enter') {
-                    event.preventDefault();
-                    alert('Postleitzahl: ' + postalCodeInput.value);
-                }
-            });
         });
+
+        if (optionOne.checked) {
+            addressInputContainer.style.display = 'none'; // Hide street input field
+            postalCodeInputContainer.style.display = 'none'; // Hide postal code input field
+        } else if (optionTwo.checked) {
+            addressInputContainer.style.display = 'block'; // Show street input field
+            postalCodeInputContainer.style.display = 'block'; // Show postal code input field
+        }
+
+        optionOne.addEventListener('change', function () {
+            if (optionOne.checked) {
+                addressInputContainer.style.display = 'none'; // Hide street input field
+                postalCodeInputContainer.style.display = 'none'; // Hide postal code input field
+            }
+        });
+
+        optionTwo.addEventListener('change', function () {
+            if (optionTwo.checked) {
+                addressInputContainer.style.display = 'block'; // Show street input field
+                postalCodeInputContainer.style.display = 'block'; // Show postal code input field
+            }
+        });
+
+
+        streetInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+            }
+        });
+
+        postalCodeInput.addEventListener('keypress', function (event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                if (postalCodeInput.value.startsWith('47') === false) {
+                    alert('Die Abholadresse liegt nicht in der Nähe der Geschäftsstelle!');
+                    return;
+                }
+            }
+        });
+
+        function submitForm() {
+            const selectedOption = optionOne.checked ? 'Übergabe an der Geschäftsstelle' : 'Abholung';
+            let streetValue = streetInput.value;
+            let postalCodeValue = postalCodeInput.value;
+            const selectedClothingType = clothingType.value;
+            const selectedLocation = locationSelect.value;
+
+            if (selectedOption === "Übergabe an der Geschäftsstelle") {
+                streetValue = "leer";
+                postalCodeValue = "leer";
+            }
+
+            localStorage.setItem('selectedOption', selectedOption);
+            localStorage.setItem('streetValue', streetValue);
+            localStorage.setItem('postalCodeValue', postalCodeValue);
+            localStorage.setItem('selectedClothingType', selectedClothingType);
+            localStorage.setItem('selectedLocation', selectedLocation);
+
+            window.location.href = '/html/next.html'; // Redirect to the next page
+        };
+
     </script>
 </body>
 

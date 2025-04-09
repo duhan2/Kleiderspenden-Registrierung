@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kleiderspenden-Registrierung</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    <link rel="manifest" href="/images/site.webmanifest">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+</head>
+
+<body>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/index.html"
+            class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+            <img src="/images/android-chrome-512x512.png" alt="Logo" class="img-fluid px-2" style="max-width: 50px;">
+            <span class="fs-4">Kleiderspenden</span>
+        </a>
+
+        <ul class="nav nav-pills">
+            <li class="nav-item"><a href="/index.html" class="nav-link active" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="/html/krisengebiete.html" class="nav-link">Krisengebiete</a></li>
+            <li class="nav-item"><a href="/html/überuns.html" class="nav-link">Über uns</a></li>
+        </ul>
+    </header>
+
+    <div class="container">
+        <dl class="row">
+            <dt class="col-sm-3">Ausgewählte Option</dt>
+            <dd class="col-sm-9" id="selectedOption"></dd>
+
+            <dt class="col-sm-3">Straße und Hausnummer</dt>
+            <dd class="col-sm-9" id="streetValue"></dd>
+
+            <dt class="col-sm-3">Postleitzahl</dt>
+            <dd class="col-sm-9" id="postalCodeValue"></dd>
+
+            <dt class="col-sm-3">Art der Kleidung</dt>
+            <dd class="col-sm-9" id="selectedClothingType"></dd>
+
+            <dt class="col-sm-3">Ausgewählter Standort</dt>
+            <dd class="col-sm-9" id="selectedLocation"></dd>
+
+        </dl>
+
+        <button type="button" class="btn btn-primary" onclick="bestätigen()">Bestätigen</button>
+        <script>
+            function bestätigen() {
+                alert(`
+                    Folgende Eingaben werden bestätigt
+                    Gewählte Option: ${selectedOption}
+                    Strasse und Hausnummer: ${streetValue}
+                    Postleitzahl: ${postalCodeValue}
+                    Kleidungsart: ${selectedClothingType}
+                    Krisengebiet: ${selectedLocation}
+                `);
+                window.location.href = "/index.html";
+            }
+        </script>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="container">
+        <footer class="py-3 my-3 border-top">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item"><a href="/html/footer-sites/impressum.html"
+                        class="nav-link px-2 text-body-secondary">Impressum</a></li>
+                <li class="nav-item"><a href="/html/footer-sites/datenschutz.html"
+                        class="nav-link px-2 text-body-secondary">Datenschutz</a></li>
+                <li class="nav-item"><a href="/html/footer-sites/faq.html"
+                        class="nav-link px-2 text-body-secondary">FAQ</a></li>
+            </ul>
+            <p class="text-center text-body-secondary">© 2025 Kleiderspenden-Registrierung</p>
+        </footer>
+    </div>
+
+    <script>
+        const selectedOption = localStorage.getItem('selectedOption');
+        const streetValue = localStorage.getItem('streetValue');
+        const postalCodeValue = localStorage.getItem('postalCodeValue');
+        const selectedClothingType = localStorage.getItem('selectedClothingType');
+        const selectedLocation = localStorage.getItem('selectedLocation');
+
+        document.getElementById('selectedOption').textContent = selectedOption;
+        document.getElementById('streetValue').textContent = streetValue;
+        document.getElementById('postalCodeValue').textContent = postalCodeValue;
+        document.getElementById('selectedClothingType').textContent = selectedClothingType;
+        document.getElementById('selectedLocation').textContent = selectedLocation;
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+        crossorigin="anonymous"></script>
+
+
+</body>
+
+</html>
